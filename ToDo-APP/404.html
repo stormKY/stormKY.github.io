@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>투두 캘린더</title>
+  <script>
+    (function redirectToSpaEntry() {
+      var location = window.location;
+      var pathSegments = location.pathname.split('/').filter(Boolean);
+      var basePath = pathSegments.length ? '/' + pathSegments[0] : '';
+      var routePath = '/' + pathSegments.slice(1).join('/');
+      var query = location.search ? '&q=' + encodeURIComponent(location.search.slice(1)) : '';
+      var redirectUrl = location.origin + basePath + '/?p=' + encodeURIComponent(routePath) + query + location.hash;
+
+      window.location.replace(redirectUrl);
+    })();
+  </script>
+</head>
+<body></body>
+</html>

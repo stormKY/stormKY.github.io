@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function restoreThemePreference() {
+      var themeKey = 'todoTheme';
+
+      try {
+        var storedTheme = localStorage.getItem(themeKey);
+        var theme = storedTheme === 'dark' || storedTheme === 'light'
+          ? storedTheme
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch (error) {
+        document.documentElement.dataset.theme = 'light';
+        document.documentElement.style.colorScheme = 'light';
+      }
+    })();
+  </script>
+  <script>
+    (function restoreSpaRouteFromQuery() {
+      var url = new URL(window.location.href);
+      var route = url.searchParams.get('p');
+      if (!route) return;
+
+      var query = url.searchParams.get('q');
+      var basePath = window.location.pathname.replace(/\/$/, '');
+      var nextPath = basePath + decodeURIComponent(route);
+
+      if (query) {
+        nextPath += '?' + decodeURIComponent(query);
+      }
+
+      if (window.location.hash) {
+        nextPath += window.location.hash;
+      }
+
+      window.history.replaceState(null, '', nextPath);
+    })();
+  </script>
+  <title>투두 캘린더</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet"
+  />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+  <script type="module" crossorigin src="/ToDo-APP/assets/index-DL5zLLHj.js"></script>
+  <link rel="stylesheet" crossorigin href="/ToDo-APP/assets/index-D8k2eyoZ.css">
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
