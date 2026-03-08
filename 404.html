@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>투두 캘린더</title>
+  <script>
+    (function redirectLegacyTodoAppRoute() {
+      var appBasePath = '/ToDo-APP';
+      var location = window.location;
+      var normalizedPath = location.pathname.replace(/\/+$/, '');
+
+      if (normalizedPath === appBasePath) {
+        window.location.replace(location.origin + appBasePath + '/' + location.search + location.hash);
+        return;
+      }
+
+      if (normalizedPath.indexOf(appBasePath + '/') === 0) {
+        var routePath = normalizedPath.slice(appBasePath.length) || '/';
+        var nextPath = location.origin + appBasePath + '/#' + routePath;
+
+        if (location.search) {
+          nextPath += location.search;
+        }
+
+        if (location.hash) {
+          nextPath += location.hash;
+        }
+
+        window.location.replace(nextPath);
+        return;
+      }
+
+      window.location.replace(location.origin + appBasePath + '/');
+    })();
+  </script>
+</head>
+<body></body>
+</html>
