@@ -5,22 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>투두 캘린더</title>
   <script>
-    (function redirectToHashRoute() {
+    (function redirectToSpaEntry() {
       var location = window.location;
       var pathSegments = location.pathname.split('/').filter(Boolean);
       var basePath = pathSegments.length ? '/' + pathSegments[0] : '';
       var routePath = '/' + pathSegments.slice(1).join('/');
-      var nextPath = location.origin + basePath + '/#' + routePath;
+      var query = location.search ? '&q=' + encodeURIComponent(location.search.slice(1)) : '';
+      var redirectUrl = location.origin + basePath + '/?p=' + encodeURIComponent(routePath) + query + location.hash;
 
-      if (location.search) {
-        nextPath += location.search;
-      }
-
-      if (location.hash) {
-        nextPath += location.hash;
-      }
-
-      window.location.replace(nextPath);
+      window.location.replace(redirectUrl);
     })();
   </script>
 </head>
